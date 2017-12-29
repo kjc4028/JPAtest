@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+    <persistence-unit name="persistenceUnit"
+        transaction-type="RESOURCE_LOCAL">
+        <properties>
+        	<!-- 동시에 insert 할 갯수 설정 ex)30개 -->
+            <property name="hibernate.jdbc.batch_size" value="30" />
+            <property name="hibernate.use_sql_comments" value="true" />
+            <property name="hibernate.hbm2ddl.auto" value="none" />
+            <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy" />
+            <property name="hibernate.connection.charSet" value="UTF-8" />
+            <!-- DBMS별 정보를 지니고 있는 Dialect를 지정하여 DBMS에 대한 독립성 제공 -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />   
+        </properties>
+    </persistence-unit>
+</persistence>
+
