@@ -16,7 +16,11 @@ import javax.persistence.Table;
 @Table(name = "jc_city")
 public class City implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "city_id")
     private Integer cityId;
@@ -82,8 +86,10 @@ public class City implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "edu.javacourse.jpa.entity.City[ cityId=" + cityId + " ]";
-    }
+	@Override
+	public String toString() {
+		return "City [cityId=" + cityId + ", cityName=" + cityName + ", regionId=" + regionId + "]";
+	}
+    
+    
 }

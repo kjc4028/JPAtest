@@ -17,7 +17,11 @@ import javax.persistence.Table;
 @Table(name = "jc_region")
 public class Region implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "region_id")
     private Integer regionId;

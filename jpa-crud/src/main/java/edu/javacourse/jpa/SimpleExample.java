@@ -11,7 +11,8 @@ import java.util.Scanner;
 
 public class SimpleExample {
 
-    public static void main(String[] args) {
+    @SuppressWarnings("resource")
+	public static void main(String[] args) {
     	boolean power = true;
     	Scanner scan0 = new Scanner(System.in);
     	System.out.println("1:Region 2:City");
@@ -29,7 +30,8 @@ public class SimpleExample {
                 rm.init();
                 EntityManager em = rm.getEntityManager();
                 
-                int id = 0;
+                @SuppressWarnings("unused")
+				int id = 0;
                 Region fromDb = new Region();
                 
                 selectRegions(em);
@@ -76,10 +78,9 @@ public class SimpleExample {
                 	System.out.println("select");
                 	selectRegions(em);
                 	Region region = new Region();
-                	region = new Region(15,"qwe");
-                      List<City> cityList = em.createQuery("select r from City r").getResultList();
+                      @SuppressWarnings("unchecked")
+					List<City> cityList = em.createQuery("select r from City r").getResultList();
                 	region.setCityList(cityList);
-                	System.out.println(region.getRegionName());
                 	System.out.println(region.getCityList());
                 	for(City i : cityList){
                 		System.out.println(i.getCityId() + " - " + i.getCityName());
@@ -110,19 +111,25 @@ public class SimpleExample {
     			CityManager cm = new CityManager();
     	        cm.init();
     	        EntityManager em2 = cm.getEntityManager();
+    	        int id2 = 0;
     	        selectCitys(em2);
+    	        Scanner scan3 = new Scanner(System.in);
+    	        System.out.println("Data Input : ");
+    	        String data = scan3.nextLine();
+    	        System.out.println("region Number : ");
+    	        Integer regionNum = scan3.nextInt();
     	        
-    	        City city = new City();
-    	        Region region = new Region();
-    	        region = new Region(15);
-    	        city.setCityName("city1");
-    	        city.setRegionId(region);
-    	        int id2 = createCity(em2, city);
-    	        
-    	        City fromdb2 = getCity(em2, id2);
-    	        
-    	        System.out.println(fromdb2.getCityId() + fromdb2.getCityName());
-    	        
+    	        if(data != null){
+    	            City city = new City();
+        	        Region region = new Region();
+        	        region = new Region(regionNum);
+        	        city.setCityName(data);
+        	        city.setRegionId(region);
+        	        createCity(em2, city);
+        	        selectCitys(em2);
+    	        }
+    	 
+    	        scan3.close();
     	        em2.close();
     	}
 
@@ -157,7 +164,8 @@ public class SimpleExample {
         em.getTransaction().commit();
     }
 
-    private static void selectRegions(EntityManager em) {
+    @SuppressWarnings("unchecked")
+	private static void selectRegions(EntityManager em) {
         System.out.println("Select Region List");
         List<Region> result = em.createQuery("select r from Region r").getResultList();
         for(Region r : result) {
@@ -166,7 +174,7 @@ public class SimpleExample {
         System.out.println("=============================");
     }
     
-    
+    //============================================================
     
     private static int createCity(EntityManager em, City city) {
         em.getTransaction().begin();
@@ -180,24 +188,27 @@ public class SimpleExample {
         return city;
     }
 
-    private static City updateCity(EntityManager em, City city) {
+    @SuppressWarnings("unused")
+	private static City updateCity(EntityManager em, City city) {
         em.getTransaction().begin();
         em.merge(city);
         em.getTransaction().commit();
         return city;
     }
 
-    private static void removeCity(EntityManager em, City city) {
+    @SuppressWarnings("unused")
+	private static void removeCity(EntityManager em, City city) {
         em.getTransaction().begin();
         em.remove(city);
         em.getTransaction().commit();
     }
 
-    private static void selectCitys(EntityManager em) {
+    @SuppressWarnings("unchecked")
+	private static void selectCitys(EntityManager em) {
         System.out.println("Select City List");
         List<City> result = em.createQuery("select r from City r").getResultList();
         for(City r : result) {
-            System.out.println(r);
+            System.out.println(r.toString());
         }
         System.out.println("=============================");
     }

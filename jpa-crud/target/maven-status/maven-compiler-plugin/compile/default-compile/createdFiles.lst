@@ -1,0 +1,5 @@
+edu\javacourse\jpa\manager\RegionManager.class
+edu\javacourse\jpa\SimpleExample.class
+edu\javacourse\jpa\entity\City.class
+edu\javacourse\jpa\entity\Region.class
+edu\javacourse\jpa\manager\CityManager.class
