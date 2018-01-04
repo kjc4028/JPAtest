@@ -12,7 +12,13 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 @Entity
+@NamedQueries({
+	@NamedQuery(name="Person.countById", query="SELECT p.* FROM Person p WHERE p.age = ?1")
+})
 @Table(name = "T_PERSON")
 public class Person implements Serializable {
     private static final long serialVersionUID = 1L;

@@ -1,9 +1,13 @@
 package com.example.mvc.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.persistence.TypedQuery;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,20 +20,34 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.mvc.entity.Person;
 import com.example.mvc.entity.Teams;
+import com.example.mvc.service.PersonService;
 import com.example.mvc.service.TeamsService;
 
 @Controller
 @RequestMapping("/teams")
 public class TeamsController {
+    private static final Logger logger = LoggerFactory
+            .getLogger(TeamsController.class);
+    
     protected static final int DEFAULT_PAGE_NUM = 0;
     protected static final int DEFAULT_PAGE_SIZE = 5;
 	@Inject
 	protected TeamsService teamsService;
 	
+	@Inject
+	protected PersonService personService;
+	
 	@RequestMapping(value="/list")
 	public String list(@RequestParam(value="page", required = false) Integer page, Model model){
 		int pageNum = page != null ? page : DEFAULT_PAGE_NUM;
 		Page<Teams> paging = teamsService.findAll(pageNum, DEFAULT_PAGE_SIZE);
+		for(int i =0; i < paging.getNumber(); i++){
+			System.out.println("abc"+paging.getContent().get(i).getPerson().get(i).getName());
+		}
+		List<Person> list = personService.countById(66);
+		model.addAttribute("join", teamsService.join());
+		model.addAttribute("memberCnt", list);
+		model.addAttribute("count", teamsService.countByTeamName("test"));
 		model.addAttribute("page", paging);
 		return "/teams/list";
 	}

@@ -10,7 +10,7 @@
                 <th>ID</th>
                 <th>NAME</th>
                 <th>AGE</th>
-                <th>&nbsp;</th>
+                <th>&nbsp; ${memberCnt} ${count}</th>
             </tr>
             <c:forEach items="${page.content}" var="person">
                 <tr>

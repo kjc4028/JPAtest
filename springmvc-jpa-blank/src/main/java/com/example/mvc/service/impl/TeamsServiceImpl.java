@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.mvc.entity.Person;
 import com.example.mvc.entity.Teams;
 import com.example.mvc.repository.TeamsRepository;
 import com.example.mvc.service.TeamsService;
@@ -51,6 +52,19 @@ public class TeamsServiceImpl implements TeamsService {
 	public Teams findById(int id) {
 		return teamsRepository.findById(id);
 	}
+
+	@Override
+	@Transactional
+	public Long countByTeamName(String teamName) {
+		return teamsRepository.countByTeamName(teamName);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public Teams join() {
+		return teamsRepository.join();
+	}
+
 
 
 }

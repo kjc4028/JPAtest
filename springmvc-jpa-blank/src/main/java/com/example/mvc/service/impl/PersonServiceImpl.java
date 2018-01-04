@@ -1,5 +1,7 @@
 package com.example.mvc.service.impl;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.data.domain.Page;
@@ -62,5 +64,11 @@ public class PersonServiceImpl implements PersonService {
     public void deleteById(Integer id) {
         personRepository.delete(id);
     }
+
+	@Override
+	@Transactional
+	public List<Person> countById(Integer age) {
+		return personRepository.countById(age);
+	}
 
 }

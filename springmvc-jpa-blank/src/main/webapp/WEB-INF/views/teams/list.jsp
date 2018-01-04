@@ -10,13 +10,17 @@
                 <th>ID</th>
                 <th>NAME</th>
                 <th>MEMBER LIMIT</th>
-                <th>&nbsp;</th>
+                <th>&nbsp; ${memberCnt} ${count}</th>
             </tr>
+            <c:forEach items="${page.content}" var="team">
+            ${team.teamId} 
+            </c:forEach>
+           
             <c:forEach items="${page.content}" var="teams">
                 <tr>
                     <td>${f:h(teams.teamId)}</td>
                     <td>${f:h(teams.teamName)}</td>
-                    <td>${f:h(teams.teamMemCount)}</td>
+                    <td>${f:h(teams.teamMemCount)} ${f:h(teams.person)}  </td>
                     <td><a
                         href='${pageContext.request.contextPath}/teams/edit/${teams.teamId}'
                         class="btn btn-primary">수정</a> <a

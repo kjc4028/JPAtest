@@ -1,5 +1,7 @@
 package com.example.mvc.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.validation.Valid;
 
@@ -16,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.mvc.entity.Person;
+import com.example.mvc.entity.Teams;
 import com.example.mvc.service.PersonService;
+import com.example.mvc.service.TeamsService;
 
 @Controller
 @RequestMapping("/person")
@@ -26,6 +30,9 @@ public class PersonController {
 
     @Inject
     protected PersonService personService;
+    
+    @Inject
+    protected TeamsService teamsService;
 
     protected static final Logger LOGGER = LoggerFactory
             .getLogger(PersonController.class);
@@ -36,7 +43,10 @@ public class PersonController {
             Model model) {
         int pageNum = page != null ? page : DEFAULT_PAGE_NUM;
         Page<Person> paging = personService.findAll(pageNum, DEFAULT_PAGE_SIZE);
+        List<Person> list = personService.countById(66);
         model.addAttribute("page", paging);
+        model.addAttribute("memberCnt",list);
+        model.addAttribute("count", teamsService.countByTeamName("test"));
         return "/person/list";
     }
 

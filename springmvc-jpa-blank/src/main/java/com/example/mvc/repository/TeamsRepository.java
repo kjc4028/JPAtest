@@ -6,4 +6,9 @@ import com.example.mvc.entity.Teams;
 
 public interface TeamsRepository extends JpaRepository<Teams, Integer> {
 	Teams findById(int id);
+	
+	Long countByTeamName(String teamName);
+	
+	Teams join();
+	
 }

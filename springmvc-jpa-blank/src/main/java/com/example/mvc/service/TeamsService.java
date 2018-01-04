@@ -15,4 +15,8 @@ public interface TeamsService {
 	Teams update(Teams teams);
 
 	void delete(Integer teamId);
+	
+	Long countByTeamName(String teamName);
+	
+	Teams join();
 }
