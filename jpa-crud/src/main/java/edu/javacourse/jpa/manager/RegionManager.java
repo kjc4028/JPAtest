@@ -21,10 +21,16 @@ public class RegionManager {
         System.out.println(entityManager.getClass().getSimpleName());
     }
 
-    public List<Region> getRegionList() {
+    @SuppressWarnings("unchecked")
+	public List<Region> getRegionList() {
         return entityManager.createQuery("select r from Region r").getResultList();
     }
-
+    
+    @SuppressWarnings("unchecked")
+	public List<Region> searchRegion(String region){
+    	return entityManager.createQuery("select r from Region r where regionName = ?1").getResultList();
+    }
+    
     public EntityManager getEntityManager() {
         return entityManager;
     }

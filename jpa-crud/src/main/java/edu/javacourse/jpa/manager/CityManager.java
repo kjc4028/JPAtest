@@ -24,7 +24,7 @@ public class CityManager {
     public List<Region> getRegionList() {
         return entityManager.createQuery("select c from City c").getResultList();
     }
-
+    
     public EntityManager getEntityManager() {
         return entityManager;
     }

@@ -85,7 +85,6 @@ public class SimpleExample {
                 	for(City i : cityList){
                 		System.out.println(i.getCityId() + " - " + i.getCityName());
                 	}
-                	
                 }
                 
                 em.close();
